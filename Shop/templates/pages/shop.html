@@ -1,0 +1,62 @@
+{% extends 'global.html' %}
+
+{% block content %}
+
+<style>
+	a {
+		text-decoration: none;
+		color: #000;
+	}
+
+	.item {
+		display: grid;
+		grid-template-columns: auto 5em;
+		grid-template-rows: 2em 3em;
+		margin: 1em;
+		background: #eee;
+		box-shadow: 0 0 0 0 #0b0;
+		transition-duration: 0.2s;
+	}
+
+	.item:hover {
+		box-shadow: 0 0 0 0.4em #0b0;
+	}
+
+	.item > .name {
+		padding: 0.5em;
+		grid-column: 1 / 2;
+		grid-row: 1 / 2;
+		border-bottom: 1px solid #bbb;
+	}
+
+	.item > .details {
+		padding: 0.5em;
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+	}
+
+	.item > a {
+		grid-column: 2 / 3;
+		grid-row: 1 / 3;
+		background: #5ee45e;
+		font-size: 2em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+</style>
+
+
+{% if items %}
+	{% for item in items %}
+		<div class="item">
+			<div class="name"><b>{{item.name}}</b> <font color="#090">{{item.price}} грн</font></div>
+			<div class="details">{{item.detail}}</div>
+			<a href="{% url 'my_shop:add_item' item.id %}">+</a>
+		</div>
+	{% endfor %}
+{% else %}
+	товари відсутні
+{% endif %}
+
+{% endblock %}

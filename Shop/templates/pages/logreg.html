@@ -1,0 +1,39 @@
+{% extends 'global.html' %}
+
+{% block content %}
+
+<style type="text/css">
+	input, button {
+		margin: 1em 1em 0em 1em;
+	}
+
+	.form {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 20em;
+	}
+
+	form {
+		padding-bottom: 1em;
+		background: #bbb;
+	}
+</style>
+
+<div class="form">
+{% if new %}
+<form action="{% url 'my_shop:create' %}" method="POST">{% csrf_token %}
+	<input type="text" placeholder="логін" required maxlength="100" name="name"><br>
+	<input type="text" placeholder="пароль" required maxlength="100" name="password"><br>
+	<button type="submit">Зареєструватись</button>
+</form>
+{% else %}
+<form action="{% url 'my_shop:check' %}" method="POST">{% csrf_token %}
+	<input type="text" placeholder="логін" required maxlength="100" name="name"><br>
+	<input type="text" placeholder="пароль" required maxlength="100" name="password"><br>
+	<button type="submit">Вхід</button>
+</form>
+{% endif %}
+</div>
+
+{% endblock %}
