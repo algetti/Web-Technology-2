@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{% endblock %}</title>
+	<style type="text/css">
+
+		body {
+			margin: 0;
+			/*font-family: calibri;*/
+			--global_color:  rgb(145,34,56);
+		}
+
+		#header {
+			display: flex;
+			flex-wrap: wrap;
+			background: var(--global_color);
+			color: #fff;
+			padding-left: calc(50vw - 50vh);
+		}
+
+		#header > a {
+			color: #fff;
+			text-decoration: none;
+			padding: 0.5em;
+			margin: 0.5em;
+			transition-duration: 3s;
+		}
+
+		#header > a:hover {
+			/*filter: brightness(1.5);*/
+			background: rgba(255,255,255,0.5);
+			transition-duration: 0.5s;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="header">
+		<a href="{% url 'my_shop:shop' %}">Головна</a>
+		<a href="{% url 'my_shop:basket' %}">Кошик</a>
+		{% if login %}
+			<a href="#">{{login.name}}</a>
+			<a href="{% url 'my_shop:log_out' %}">вихід</a>
+		{% else %}
+			<a href="{% url 'my_shop:log_in' %}">вхід</a>
+			<a href="{% url 'my_shop:register' %}">реєстрація</a>
+		{% endif %}
+		<a href="/admin">admin</a>
+		
+	</div>
+	{% block content %}{% endblock %}
+</body>
+</html>
